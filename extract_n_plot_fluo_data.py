@@ -38,13 +38,14 @@ import pygal
 # usar datetime para transformar cada key en un datetime object
 
 # box-plot
+
+# filename_1 = "20200102113551_00890018002017-00320181107-874282.csv"
+
 ######
 
 file_path = '/home/alina/Learning_to_Code/My_Projects/raw_readings/test_files'
 
 test_files = os.listdir(file_path)
-
-# filename_1 = "20200102113551_00890018002017-00320181107-874282.csv"
 
 all_data = {}
 
@@ -77,10 +78,24 @@ for filename in test_files:
 # para cada archivo de == fecha, debe tomar los datapoints y agregarlos a una misma lista
 # y eso es el value del key-fecha
 
+
 # cdo cambia la fecha, debe crear una nueva lista y un nuevo key
 
+# seguir con esto:
 
+# primero, de cada filename, extraer los primeros 8 char y armar una lista con eso
+# entonces, usar esa lista para iterar sobre ella
+# y comparar con el archivo que esta siendo leido, algo asi:
 
+i = 0
+while True:
+    if filename[0:8] == filename_in_list[0]:
+        process block from lines 46-74
+    else:
+        i += 1
+
+# ESTA ES LA IDEA GENERAL, ESO DE AHI VA A TIRAR ERROR, HAY QUE REARMAR
+    
 
 
 
