@@ -40,16 +40,69 @@ import pygal
 # box-plot
 ######
 
-filename_1 = "20200102113551_00890018002017-00320181107-874282.csv"
+file_path = '/home/alina/Learning_to_Code/My_Projects/raw_readings/test_files'
+
+test_files = os.listdir(file_path)
+
+# filename_1 = "20200102113551_00890018002017-00320181107-874282.csv"
+
+all_data = {}
 
 start = 46
 stop = 62
-raw_data =[]
 
-for i in range(start, stop):
-    with open(filename_1) as f:
-        row = next(itertools.islice(csv.reader(f), i, None))
-        raw_data.append(row)
+for filename in test_files:
+    raw_data =[]
+    for i in range(start, stop):
+        with open(filename) as f:
+            row = next(itertools.islice(csv.reader(f), i, None))
+            raw_data.append(row)
+    
+    file_date = filename[0:8]
+    data_points_lists = []
+    for item in raw_data:
+        x = item[1:len(item)-1]   # I only need raw_data[item][1:25]
+        data_points_lists.append(x)
+    
+    data_points = [data_point for inner_list in data_points_lists for data_point in inner_list]
+
+    if all_data == {}:
+        all_data[file_date] = data_points
+    else:
+        for data_point in data_points:
+            all_data[file_date].append(data_point)
+
+
+
+# para cada archivo de == fecha, debe tomar los datapoints y agregarlos a una misma lista
+# y eso es el value del key-fecha
+
+# cdo cambia la fecha, debe crear una nueva lista y un nuevo key
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # raw_data holds lines 46-62 of the fluorescence file (list of lists)
 for item in raw_data:
@@ -72,18 +125,7 @@ for item in raw_data:
 # ['P', '8177.0', '8245.0', '10969.0', '7797.0', '10141.0', '8319.0', '10227.0', '9843.0', '10028.0', '10266.0', '10761.0', '9621.0', '10635.0', '8678.0', '11415.0', '9674.0', '10024.0', '9840.0', '10291.0', '8092.0', '11590.0', '9236.0', '10498.0', '9534.0', '']
 
 
-file_date = filename_1[0:8]
 
-all_data = {}
-data_points_lists = []
-
-for item in raw_data:
-    x = item[1:len(item)-1]   # I only need raw_data[item][1:25]
-    data_points_lists.append(x)
-
-data_points = [data_point for inner_list in data_points_lists for data_point in inner_list]
-
-all_data[file_date] = data_points
 
 
 
