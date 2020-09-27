@@ -22,11 +22,15 @@ import pygal
 import matplotlib.pyplot as plt
 
 # program starts here
-file_path = '/home/alina/Learning_to_Code/My_Projects/raw_readings/test_files'
-
+# file_path = input("Enter the absolute file path\nof the directory where your files are located.\nExample: /home/alina/my_files\n\t:")
+# file_path = '/home/alina/Learning_to_Code/My_Projects/raw_readings/test_files' 
+file_path = '/home/alina/Learning_to_Code/My_Projects/raw_readings/other_files/Raw_Readings'
 # these are the files to iterate over:
 test_files = os.listdir(file_path)
 test_files.sort()
+
+# for i in range(len(test_files)):
+#     test_files[i] = file_path + '/' + test_files[i]
 
 all_data = {}
 
@@ -61,12 +65,21 @@ for filename in test_files:
 data = [value for value in all_data.values()]
 dates = [key for key in all_data.keys()]
 
+# what follows doesn't work, it just gives a low resolution graph
 fig1, ax1 = plt.subplots()
+# ax1.figure(dpi=1200) 
 ax1.set_title("Fluorescence vs. date")
 ax1.boxplot(data)
 ax1.set_xlabel("Days")
 ax1.set_ylabel("Fluorescence")
 ax1.set_xticklabels(dates, rotation=30, fontsize=10)
+fig1.savefig('fluorescence_vs_date_27700.pdf')
+
+
+# using just plt is even worse, come back after learning matplotlib
+# plt.set_title("Fluorescence vs. date")
+plt.boxplot(data)
+# plt.set_xticklabels(dates, rotation=30, fontsize=10)
 plt.show()
 
 
@@ -75,4 +88,4 @@ box_plot = pygal.Box()
 box_plot.title = "Fluorescence vs. date"
 for key, value in all_data.items():
     box_plot.add(key, value)
-box_plot.render_to_file('fluorescence_vs_date.svg')
+box_plot.render_to_file('/home/alina/Learning_to_Code/My_Projects/raw_readings/fluorescence_vs_date_27700.svg')
