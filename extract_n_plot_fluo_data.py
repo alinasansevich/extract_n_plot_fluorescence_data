@@ -41,7 +41,7 @@ for filename in test_files:
     try:
         raw_data =[]
         for i in range(start, stop):
-            with open(filename) as f:
+            with open(file_path + '/' + filename) as f:
                 row = next(itertools.islice(csv.reader(f), i, None))
                 raw_data.append(row)
     except StopIteration:
@@ -62,17 +62,23 @@ for filename in test_files:
 
 
 # # Plot with matplotlib.
-# data = [value for value in all_data.values()]
-# dates = [key for key in all_data.keys()]
+data = [value for value in all_data.values()]
+dates = [key for key in all_data.keys()]
 
-# # what follows doesn't work, it just gives a low resolution graph
+# what follows doesn't work, it just gives a low resolution graph
 # fig1, ax1 = plt.subplots()
-# # ax1.figure(dpi=1200) 
-# ax1.set_title("Fluorescence vs. date")
-# ax1.boxplot(data)
-# ax1.set_xlabel("Days")
-# ax1.set_ylabel("Fluorescence")
-# ax1.set_xticklabels(dates, rotation=30, fontsize=10)
+
+fig = plt.figure(figsize=(40, 4))
+ax = fig.add_subplot(111)
+
+# ax1.figure(dpi=1200) 
+ax.set_title("Fluorescence vs. date")
+ax.boxplot(data)
+ax.set_xlabel("Days")
+ax.set_ylabel("Fluorescence")
+ax.set_xticklabels(dates, rotation=30, fontsize=10)
+plt.tight_layout()
+plt.show()
 # fig1.savefig('fluorescence_vs_date_27700.pdf')
 
 
@@ -84,8 +90,8 @@ for filename in test_files:
 
 
 # Plot with pygal.
-box_plot = pygal.Box(width=1000)
-box_plot.title = "Fluorescence vs. date"
-for key, value in all_data.items():
-    box_plot.add(key, value)
-box_plot.render_to_file('/home/alina/Learning_to_Code/My_Projects/raw_readings/fluorescence_vs_date_27700-hoy.svg')
+# box_plot = pygal.Box(width=1000)
+# box_plot.title = "Fluorescence vs. date"
+# for key, value in all_data.items():
+#     box_plot.add(key, value)
+# box_plot.render_to_file('/home/alina/Learning_to_Code/My_Projects/raw_readings/fluorescence_vs_date_27700-hoy.svg')
