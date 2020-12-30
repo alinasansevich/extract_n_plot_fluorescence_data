@@ -18,13 +18,12 @@ import csv
 import itertools
 
 # import datetime
-import pygal
 import matplotlib.pyplot as plt
 
 # program starts here
 # file_path = input("Enter the absolute file path\nof the directory where your files are located.\nExample: /home/alina/my_files\n\t:")
-# file_path = '/home/alina/Learning_to_Code/My_Projects/raw_readings/test_files' 
-file_path = '/home/alina/Learning_to_Code/My_Projects/raw_readings/other_files/Raw_Readings'
+file_path = '/home/alina/Learning_to_Code/My_Projects/raw_readings/test_files' 
+# file_path = '/home/alina/Learning_to_Code/My_Projects/raw_readings/other_files/Raw_Readings'
 # these are the files to iterate over:
 test_files = os.listdir(file_path)
 test_files.sort()
@@ -65,15 +64,18 @@ for filename in test_files:
 data = [value for value in all_data.values()]
 dates = [key for key in all_data.keys()]
 
-# what follows doesn't work, it just gives a low resolution graph
-# fig1, ax1 = plt.subplots()
 
+# boxprops = dict(linestyle='--', linewidth=3, color='darkgoldenrod')
+# flierprops = dict(marker='o', markerfacecolor='green', markersize=12,
+#                   linestyle='none')
+
+flierprops = dict(marker='+', markersize=3)
 fig = plt.figure(figsize=(40, 4))
 ax = fig.add_subplot(111)
 
 # ax1.figure(dpi=1200) 
 ax.set_title("Fluorescence vs. date")
-ax.boxplot(data)
+ax.boxplot(data, flierprops=flierprops)
 ax.set_xlabel("Days")
 ax.set_ylabel("Fluorescence")
 ax.set_xticklabels(dates, rotation=30, fontsize=10)
